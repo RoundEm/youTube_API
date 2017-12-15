@@ -6,10 +6,10 @@ function getDataFromApi(searchTerm, callback, pageToken) {
 	}
 	const query = {
 		part: 'snippet',
-	  	key: 'AIzaSyC66T2dUVOC-aw6kL9JEnOzNDQKJ21grag',
-	    q: `${searchTerm}`,
-	    pageToken: pageToken,
-	    maxResults: 20
+		key: 'AIzaSyC66T2dUVOC-aw6kL9JEnOzNDQKJ21grag',
+		q: `${searchTerm}`,
+		pageToken: pageToken,
+		maxResults: 20
   	}
   	$.getJSON(YOUTUBE_SEARCH_URL, query, callback);
 }
