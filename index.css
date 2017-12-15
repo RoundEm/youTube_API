@@ -1,6 +1,12 @@
 .js-search-results div {
 	margin: 0 0 20px;
 }
-.nextPage {
+.moreResults {
 	display: none;
+}
+main {
+	margin: 0 0 0 15px;
+}
+input {
+	width: 15%;
 }
