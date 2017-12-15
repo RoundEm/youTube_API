@@ -1,10 +1,10 @@
 const YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
 
-funtion getDataFromApi(searchTerm, callback, pageToken) {
+function getDataFromApi(searchTerm, callback, pageToken) {
 	if (typeof pageToken === 'undefined') {
 		pageToken = '';
 	}
-	const query {
+	const query = {
 		part: 'snippet',
 	  	key: 'AIzaSyC66T2dUVOC-aw6kL9JEnOzNDQKJ21grag',
 	    q: `${searchTerm}`,
@@ -20,11 +20,11 @@ const youTubeSearch = {
 
 function submitListen() {
 	$('.js-search-form').submit(event => {
-		event.preventDefault;
-		const $queryTarget = $($this).find('.js-query');
+		event.preventDefault();
+		const queryTarget = $(event.currentTarget).find('.js-query');
 		youTubeSearch.currentQuery = queryTarget.val();
 		// clear search field
-		$queryTarget.val() = '';
+		queryTarget.val('');
 		getDataFromApi(youTubeSearch.currentQuery, displayYouTubeSearchData);
 		showMoreResults();
 	});
@@ -32,14 +32,13 @@ function submitListen() {
 
 function displayYouTubeSearchData(data) {
 	const results = data.items.map((item) => renderResult(item));
-	$('js-search-results').html(results);
+	$('.js-search-results').html(results);
 	// find token # of next and previous results
 	const nextPageId = data.nextPageToken;
 	const prevPageId = data.prevPageToken;
 	nextPage(nextPageId);
 	prevPage(prevPageId);
 }
-
 
 function renderResult(result) {
 	console.log('Result:', result);
@@ -56,7 +55,7 @@ function showMoreResults() {
 }
 
 function nextPage(nextPageId) {
-	$('.nextPage').submit(event => {
+	$('.moreResults').submit(event => {
 		event.preventDefault();
 		console.log('next page token:', nextPageId);
 		getDataFromApi(youTubeSearch.currentQuery, displayYouTubeSearchData, nextPageId);
