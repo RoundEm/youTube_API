@@ -7,6 +7,26 @@
     <link href="index.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-
+	<main>
+		<header role="banner">
+			<h1>Search YouTube for Videos</h1>
+		</header>
+			<form class="js-search-form">
+				<label class="query"></label>
+				<input type="text" name="youTubeSearch" class="js-query">
+				<button type="submit">Search</button>
+			</form>
+			<h2>Results</h2>
+          	<div class="js-search-results">
+        		<!-- search results insert here -->  
+	        </div>
+        	<button type="submit">More Results</button> 		    
+	</main>
+	<script
+          src="https://code.jquery.com/jquery-3.2.1.min.js"
+          integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+          crossorigin="anonymous">
+  	</script>
+  	<script src="index.js"></script>
 </body>
 </html>
