@@ -18,7 +18,11 @@ const youTubeSearch = {
 	currentQuery: '',
 };
 
-function submitListen() {
+const pageTracker = {
+	currentPage: 0,
+};
+
+function submitListener() {
 	$('.js-search-form').submit(event => {
 		event.preventDefault();
 		const queryTarget = $(event.currentTarget).find('.js-query');
@@ -26,7 +30,7 @@ function submitListen() {
 		// clear search field
 		queryTarget.val('');
 		getDataFromApi(youTubeSearch.currentQuery, displayYouTubeSearchData);
-		showMoreResults();
+		showMoreResultsBtn();
 	});
 }
 
@@ -35,13 +39,17 @@ function displayYouTubeSearchData(data) {
 	$('.js-search-results').html(results);
 	// find token # of next and previous results
 	const nextPageId = data.nextPageToken;
-	const prevPageId = data.prevPageToken;
 	nextPage(nextPageId);
+	console.log('next page token:', nextPageId);
+	const prevPageId = data.prevPageToken;
 	prevPage(prevPageId);
 }
 
+function pageHandler() {
+
+}
+
 function renderResult(result) {
-	console.log('Result:', result);
 	return `
 		<div>
 			${result.snippet.title} <br>
@@ -50,16 +58,28 @@ function renderResult(result) {
 	`;
 }
 
-function showMoreResults() {
-  $('.nextPage').fadeIn(2500);
+function showMoreResultsBtn() {
+  $('.moreResults').fadeIn(2000);
 }
 
 function nextPage(nextPageId) {
 	$('.moreResults').submit(event => {
 		event.preventDefault();
-		console.log('next page token:', nextPageId);
+		// show previous page button
+		$('.prevResults').show();
+		console.log('next page token 2:', nextPageId);
 		getDataFromApi(youTubeSearch.currentQuery, displayYouTubeSearchData, nextPageId);
+		pageTracker.currentPage++;
+	});
+}
+function prevPage(prevPageId) {
+	$('.prevResults').submit(event => {
+		event.preventDefault();
+		console.log('prev page token:', prevPageId);
+		getDataFromApi(youTubeSearch.currentQuery, displayYouTubeSearchData, prevPageId);
+		// $('.prevResults').hide();
+		pageTracker.currentPage--;
 	});
 }
 
-$(submitListen);
+$(submitListener);

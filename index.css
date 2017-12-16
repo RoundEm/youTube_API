@@ -4,6 +4,9 @@
 .moreResults {
 	display: none;
 }
+.prevResults {
+	display: none;
+}
 main {
 	margin: 0 0 0 15px;
 }
